@@ -1,0 +1,89 @@
+<section class="main-product-section container">
+  {% paginate collection.products by {{section.settings.products_per_page}} %}
+  <div class="products-wrapper" data-next-url="{{paginate.next.url}}">
+   {% for product in collection.products %}
+    <div class="product-grid">
+      <a href="{{product.url}}"><div class="product-image" style="background-image: url('{{product.featured_image | img_url: '2000x'}}');">
+      </div></a>
+      <div class="product-title popup-cart-title">
+          <h4><a href="product.url">{{product.title}}</a></h4>
+          <span>{{product.price |  money}}</span>
+          {% if product.compare_at_price %}
+            <span class="compare-price">{{product.compare_at_price | money}}</span>
+          {% endif %}
+          {% for option in product.options_with_values %}
+            {% if option.name contains 'Color' %}
+              <div class="custom-swatches-list">
+                {% for value in option.values %}
+                  {% for variant in product.variants %}
+                    {% if variant.title contains value %}
+                      {% assign variant_image_source = variant.image | img_url: '1000x' %}
+                    {% endif %}
+                  {% endfor %}
+                  <span class="color-{{value |  handleize}}" data-image-source="{{variant_image_source}}"></span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endfor %}
+       </div>
+    </div>
+   {% endfor %}
+  </div>
+    {% if paginate.pages > 1 %}
+    <button class="load-more-btn">Load more</button>
+    <div class="load-more-spinner"></div>
+  {% endif %}
+  {% endpaginate %}
+</section>
+{% schema %}
+{
+  "name": "Product Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 10,
+      "label": "Products per page"
+    }
+    ]
+}
+{% endschema %}
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){
+    let productsOnPage = $('.products-wrapper')
+    let nextUrl = productsOnPage.attr('data-next-url')
+    let loadMoreBtn = $('.load-more-btn');
+    let loadMoreSpinner = $('.load-more-spinner');
+    $('.load-more-btn').click(function(e){
+    e.preventDefault();
+    loadMoreBtn.hide()
+    loadMoreSpinner.show()
+    $.ajax({
+      url: nextUrl,
+      type: "GET",
+      dataType: "html",
+      success: function(nextPage){
+        loadMoreSpinner.hide();
+        let newProducts = $(nextPage).find('.products-wrapper')
+        productsOnPage.append(newProducts.html());
+        let newUrl = newProducts.attr('data-next-url');
+        nextUrl = newUrl
+        if(newUrl){
+          loadMoreBtn.show();
+        }
+      }
+    })
+
+    })
+   $(document).on('mouseover', '.custom-swatches-list span', function(){
+    let imageSrouce = $(this).attr('data-image-source')
+    let productImage = $(this).closest('.product-grid').find('.product-image')
+    productImage.css('background-image', `url(${imageSrouce})`)
+   })
+  })
+</script>
