@@ -33,11 +33,9 @@
           "type": "menu",
           "settings": {
             "title": "Electronics",
-            "linklist": "electronics",
-            "image_1": "shopify:\/\/shop_images\/01_f642b681-7609-4cef-95ea-2c69c5150330.jpg",
+            "linklist": "",
             "caption_1": "",
             "link_1": "",
-            "image_2": "shopify:\/\/shop_images\/12a_aa258125-cd9f-4c2b-afd3-e60c7d9a52ad.jpg",
             "caption_2": "",
             "link_2": "",
             "caption_3": "",
@@ -50,17 +48,13 @@
           "type": "menu",
           "settings": {
             "title": "Cloathing",
-            "linklist": "cloathing",
-            "image_1": "shopify:\/\/shop_images\/c3.jpg",
+            "linklist": "",
             "caption_1": "",
             "link_1": "",
-            "image_2": "shopify:\/\/shop_images\/c4.jpg",
             "caption_2": "",
             "link_2": "",
-            "image_3": "shopify:\/\/shop_images\/14a_b78194e0-a64c-42b0-8ab2-2ad311468b38.jpg",
             "caption_3": "",
             "link_3": "",
-            "image_4": "shopify:\/\/shop_images\/12b_ac8a85b8-8e91-43b8-9d5f-444253dd1936.jpg",
             "caption_4": "",
             "link_4": ""
           }
@@ -72,7 +66,7 @@
       ],
       "settings": {
         "logo_position": "middle-left",
-        "menu": "main-menu",
+        "menu": "custom-mega-menu",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "always",
         "show_line_separator": true,
