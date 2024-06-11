@@ -66,7 +66,7 @@
         "fc7ba5a7-a1b7-406e-9e44-39638f2197d7"
       ],
       "settings": {
-        "logo_position": "middle-left",
+        "logo_position": "middle-center",
         "menu": "custom-mega-menu",
         "menu_type_desktop": "mega",
         "sticky_header_type": "always",
